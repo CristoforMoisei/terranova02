@@ -1,5 +1,11 @@
 # Sistema di Gestione del Calendario Ferie Aziendale
 
+![Status](https://img.shields.io/badge/status-in%20development-blue)
+
+![Backend](https://img.shields.io/badge/backend-php-green)
+![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-orange)
+![Database](https://img.shields.io/badge/database-MySQL-lightgrey)
+
 ## Descrizione del Progetto
 
 Il progetto prevede la realizzazione di un sistema informatico per la gestione del calendario ferie annuale dei dipendenti di un’azienda.
@@ -106,7 +112,9 @@ Le tecnologie sono:
 
 ---
 
-
 ## Autori
 
 Bonfanti, Marchiella, Moisei, Tessaro.
+
+![Status](https://img.shields.io/badge/status-in%20development-blue)
+![Database](https://img.shields.io/badge/database-MySQL-orange)

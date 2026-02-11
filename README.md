@@ -6,6 +6,21 @@
 ![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-orange)
 ![Database](https://img.shields.io/badge/database-MySQL-lightgrey)
 
+## Indice
+
+- [Descrizione del Progetto](#descrizione-del-progetto)
+- [Obiettivi Funzionali](#obiettivi-funzionali)
+  - [1. Autenticazione e gestione utenti](#1-autenticazione-e-gestione-utenti)
+  - [2. Gestione gruppi e ruoli](#2-gestione-gruppi-e-ruoli)
+  - [3. Calendario ferie condiviso](#3-calendario-ferie-condiviso)
+  - [4. Regole aziendali configurabili](#4-regole-aziendali-configurabili)
+  - [5. Gestione richieste e approvazioni](#5-gestione-richieste-e-approvazioni)
+  - [6. Area amministrativa](#6-area-amministrativa)
+- [Architettura del Sistema](#architettura-del-sistema)
+- [Modellazione Database](#modellazione-database)
+- [Tecnologie Utilizzate](#tecnologie-utilizzate)
+- [Autori](#autori)
+
 ## Descrizione del Progetto
 
 Il progetto prevede la realizzazione di un sistema informatico per la gestione del calendario ferie annuale dei dipendenti di un’azienda.

@@ -1,10 +1,6 @@
 # Sistema di Gestione del Calendario Ferie Aziendale
 
-![Status](https://img.shields.io/badge/status-in%20development-blue)
-
-![Backend](https://img.shields.io/badge/backend-php-green)
-![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-orange)
-![Database](https://img.shields.io/badge/database-MySQL-lightgrey)
+![Status](https://img.shields.io/badge/status-in%20development-blue) ![Backend](https://img.shields.io/badge/backend-php-green) ![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-orange) ![Database](https://img.shields.io/badge/database-MySQL-lightgrey)
 
 ## Indice
 

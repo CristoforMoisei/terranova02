@@ -128,4 +128,3 @@ Le tecnologie sono:
 Riccardo Bonfanti, Diego Marchiella, Cristofor Moisei, Alessandro Tessaro.
 
 ![Status](https://img.shields.io/badge/status-in%20development-blue)
-![Database](https://img.shields.io/badge/database-MySQL-orange)

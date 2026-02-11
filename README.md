@@ -1,299 +1,112 @@
+# Sistema di Gestione del Calendario Ferie Aziendale
 
-# terranova02
-## Sistema di Gestione del Calendario Ferie Aziendale
+## Descrizione del Progetto
 
----
+Il progetto prevede la realizzazione di un sistema informatico per la gestione del calendario ferie annuale dei dipendenti di un’azienda.
 
-## 1. Descrizione del Progetto
+L’obiettivo è sviluppare una piattaforma web che consenta:
 
-Il presente progetto prevede la realizzazione di un sistema informatico per la gestione del calendario ferie aziendale.
-
-L’obiettivo è sviluppare una piattaforma che consenta di:
-
-- Pianificare le ferie nei periodi stabiliti dall’azienda (es. estate, Natale)
-- Evitare sovrapposizioni critiche
-- Garantire la presenza minima del personale
-- Favorire trasparenza tra dipendenti, responsabili e amministrazione
-- Automatizzare la validazione delle richieste ferie
-
-Il sistema supporta tre categorie di utenti:
-- Dipendenti
-- Responsabili di gruppo
-- Amministratori aziendali
+- La pianificazione delle ferie nei periodi stabiliti dall’azienda (es. periodo estivo, festività natalizie).
+- Il rispetto delle regole aziendali relative alla disponibilità minima del personale.
+- La gestione dei conflitti tra richieste.
+- La comunicazione tra dipendenti, responsabili di gruppo e amministrazione.
 
 ---
 
-## 2. Obiettivi del Sistema
+## Obiettivi Funzionali
 
-- Centralizzare la gestione delle ferie
-- Applicare regole aziendali configurabili
-- Ridurre conflitti tra richieste
-- Monitorare la disponibilità del personale
-- Fornire uno storico completo delle interazioni
+Il sistema dovrà permettere:
 
----
+### 1. Autenticazione e gestione utenti
 
-## 3. Ruoli del Sistema
+- Accesso tramite login.
+- Utenti pre-caricati dall’azienda (assenza di registrazione libera).
+- Gestione ruoli: Dipendente, Responsabile di gruppo, Amministratore.
+- Possibilità di reset credenziali.
 
-| Ruolo | Permessi principali |
-|-------|---------------------|
-| Dipendente | Inserimento richieste ferie, visualizzazione calendario del gruppo |
-| Responsabile di Gruppo | Approvazione/rifiuto richieste, gestione conflitti, inserimento commenti |
-| Amministratore Aziendale | Gestione utenti, gruppi, periodi ferie e configurazioni di sistema |
+### 2. Gestione gruppi e ruoli
 
----
+- Ogni dipendente appartiene ad almeno un gruppo di lavoro.
+- Ogni gruppo ha un responsabile.
+- Il responsabile può:
+  - Visualizzare le richieste del proprio team
+  - Approvare o rifiutare richieste
+  - Gestire conflitti
+  - Comunicare tramite sistema di commenti
 
-## 4. Autenticazione
+### 3. Calendario ferie condiviso
 
-### Modalità di Accesso
+- Visualizzazione:
+  - Ferie personali
+  - Ferie dei colleghi del gruppo
+  - Periodi prenotabili
+- Evidenziazione giorni:
+  - Disponibili
+  - In conflitto
+  - Non prenotabili
 
-- Login tramite email aziendale e password
-- Password salvata mediante hash sicuro
-- Nessuna registrazione libera
-- Utenti pre-caricati dall’azienda
+### 4. Regole aziendali configurabili
 
----
+Per ogni periodo ferie è possibile definire:
 
-## 5. Modello Dati
+- Finestra temporale
+- Presenza minima per ruolo
+- Numero minimo/massimo di giorni prenotabili
+- Numero minimo/massimo di giorni consecutivi
+- Periodi critici bloccati
 
-### 5.1 Tabella `Users`
+### 5. Gestione richieste e approvazioni
 
-| Campo | Tipo | Vincoli |
-|-------|------|---------|
-| id_user | INT | PK, AUTO_INCREMENT |
-| nome | VARCHAR(50) | NOT NULL |
-| cognome | VARCHAR(50) | NOT NULL |
-| email | VARCHAR(100) | UNIQUE, NOT NULL |
-| password_hash | VARCHAR(255) | NOT NULL |
-| ruolo | ENUM('DIPENDENTE','RESPONSABILE','ADMIN') | NOT NULL |
-| attivo | BOOLEAN | DEFAULT TRUE |
+- Invio richiesta ferie
+- Segnalazione conflitti
+- Approvazione, rifiuto o richiesta modifica
+- Storico comunicazioni tramite tabella Comments
 
----
+### 6. Area amministrativa
 
-### 5.2 Reset Password
+L’amministratore può:
 
-Modalità prevista:
-
-- Richiesta reset tramite email aziendale
-- Generazione token temporaneo con scadenza
-
-#### Tabella `Password_Reset`
-
-| Campo | Tipo | Vincoli |
-|-------|------|---------|
-| id_reset | INT | PK |
-| id_user | INT | FK → Users(id_user) |
-| token | VARCHAR(255) | UNIQUE |
-| data_scadenza | DATETIME | NOT NULL |
-| utilizzato | BOOLEAN | DEFAULT FALSE |
+- Gestire utenti, gruppi e ruoli
+- Configurare periodi ferie
+- Impostare regole e criteri di priorità
+- Monitorare disponibilità del personale
 
 ---
 
-## 6. Organizzazione: Gruppi e Relazioni
+## Architettura del Sistema
 
-Ogni dipendente appartiene ad almeno un gruppo di lavoro.
+Il progetto è strutturato secondo un’architettura client-server:
 
-### Tabella `Groups`
-
-| Campo | Tipo | Vincoli |
-|-------|------|---------|
-| id_group | INT | PK |
-| nome | VARCHAR(100) | NOT NULL |
-| id_responsabile | INT | FK → Users(id_user) |
+- Frontend: interfaccia web per utenti e amministratori
+- Backend: gestione logica applicativa e validazione regole
+- Database relazionale: gestione dati strutturati
 
 ---
 
-### Tabella `User_Groups` (Relazione molti-a-molti)
+## Modellazione Database
 
-| Campo | Tipo | Vincoli |
-|-------|------|---------|
-| id_user | INT | FK → Users(id_user) |
-| id_group | INT | FK → Groups(id_group) |
-| PRIMARY KEY (id_user, id_group) | | |
+Il sistema prevede un database relazionale con entità principali quali:
 
----
-
-## 7. Calendario Ferie Condiviso
-
-Dopo il login, l’utente visualizza:
-
-- Le proprie ferie
-- Le ferie dei colleghi del gruppo
-- I periodi prenotabili
-- Eventuali conflitti
-
-### Indicazione Stato Giorni (Interfaccia)
-
-| Stato | Colore suggerito |
-|-------|------------------|
-| Giorno disponibile | Verde |
-| Giorno occupato | Rosso |
-| Giorno con conflitto | Giallo |
-| Periodo non prenotabile | Grigio |
-
-Il calendario può essere implementato tramite:
-
-- Librerie JavaScript (es. FullCalendar)
-- Componenti React o Angular
-- Soluzione custom HTML, CSS e JavaScript
+- User
+- Group
+- Comment
+- Registrazione
 
 ---
 
-## 8. Richieste di Ferie
+## Tecnologie Utilizzate
 
-### Tabella `Vacation_Requests`
+Le tecnologie sono:
 
-| Campo | Tipo | Vincoli |
-|-------|------|---------|
-| id_request | INT | PK |
-| id_user | INT | FK → Users(id_user) |
-| data_inizio | DATE | NOT NULL |
-| data_fine | DATE | NOT NULL |
-| stato | ENUM('IN_ATTESA','APPROVATA','RIFIUTATA') | NOT NULL |
-| data_richiesta | DATETIME | DEFAULT CURRENT_TIMESTAMP |
+- Backend: 
+- Frontend:
+- Framework:
+- Database: 
+- Ambiente di sviluppo: Visual Studio Code
 
 ---
 
-## 9. Regole di Gestione Ferie
 
-Ogni periodo ferie è configurabile dall’amministrazione aziendale.
+## Autori
 
-### Tabella `Vacation_Periods`
-
-| Campo | Tipo |
-|-------|------|
-| id_period | INT (PK) |
-| nome_periodo | VARCHAR(100) |
-| data_inizio | DATE |
-| data_fine | DATE |
-| min_giorni | INT |
-| max_giorni | INT |
-| min_consecutivi | INT |
-| presenza_minima_percentuale | INT |
-| blocco_totale | BOOLEAN |
-
----
-
-## 10. Validazione delle Richieste
-
-Se una richiesta viola una o più regole:
-
-- Evidenziazione immediata lato client
-- Messaggio esplicativo dettagliato
-- Blocco automatico o richiesta di revisione
-
-Esempio:
-
-```
-
-Richiesta non valida: numero minimo di giorni consecutivi non rispettato.
-
-```
-
----
-
-## 11. Gestione Commenti e Comunicazioni
-
-### Tabella `Comments`
-
-| Campo | Tipo |
-|-------|------|
-| id_comment | INT (PK) |
-| id_request | INT (FK) |
-| id_autore | INT (FK) |
-| testo | TEXT |
-| data_commento | DATETIME |
-
-Utilizzata per:
-
-- Richieste di modifica
-- Proposte alternative
-- Comunicazioni ufficiali
-
----
-
-## 12. Interfaccia Amministratore
-
-L’amministratore dispone di una sezione dedicata per:
-
-- Creazione e modifica utenti
-- Gestione gruppi
-- Impostazione periodi ferie
-- Configurazione regole
-- Monitoraggio disponibilità personale
-- Visualizzazione statistiche
-
----
-
-## 13. Architettura del Sistema
-
-```
-
-Frontend (React / Angular / HTML-CSS-JS)
-↓
-Backend API REST (NodeJS / PHP / C#)
-↓
-Database Relazionale (MySQL / PostgreSQL / SQL Server)
-
-```
-
----
-
-## 14. Obiettivi Formativi
-
-Il progetto consente di sviluppare competenze in:
-
-- Analisi dei requisiti
-- Modellazione di database relazionali
-- Progettazione architettura software
-- Gestione autenticazione e autorizzazioni
-- Implementazione di logiche di validazione
-- Sviluppo di interfacce web interattive
-- Redazione documentazione tecnica
-- Pianificazione dei test
-
----
-
-## 15. Documentazione Richiesta
-
-- Analisi dei requisiti
-- Analisi funzionale
-- Analisi tecnica
-- Schema ER
-- Schema logico relazionale
-- Piani di test
-- Manuale utente
-- Manuale di installazione
-
----
-
-## 16. Criteri di Valutazione
-
-La valutazione si concentra su:
-
-1. Analisi dei requisiti  
-2. Modellazione del database  
-3. Architettura del sistema  
-4. Qualità progettuale  
-5. Interfaccia utente  
-6. Documentazione tecnica  
-7. Processo di sviluppo  
-8. Codice (valore aggiunto, non centrale)
-
----
-
-## 17. Tecnologie Utilizzabili
-
-- Backend: C#, NodeJS, PHP  
-- Frontend: HTML, CSS, JavaScript  
-- Framework: React, Angular, Vue  
-- Database: MySQL, PostgreSQL, SQL Server  
-- IDE: Visual Studio, VS Code, Eclipse  
-
----
-
-## 18. Stato del Progetto
-
-Progetto sviluppato nell’ambito del percorso PCTO  
-(Percorsi per le Competenze Trasversali e l’Orientamento).
-```
+Bonfanti, Marchiella, Moisei, Tessaro.

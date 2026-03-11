@@ -125,6 +125,6 @@ Le tecnologie sono:
 
 ## Autori
 
-Riccardo Bonfanti, Diego Marchiella, Cristofor Moisei, Alessandro Tessaro.
+Riccardo Bonfanti, Cristofor Moisei, Diego Marchiella, Alessandro Tessaro.
 
 ![Status](https://img.shields.io/badge/status-in%20development-blue)

@@ -115,10 +115,10 @@ Il sistema prevede un database relazionale con entità principali quali:
 
 Le tecnologie sono:
 
-- Backend: 
-- Frontend:
-- Framework:
-- Database: 
+- Backend: PHP
+- Frontend: HTML, CSS, JS
+- Framework: Springboot
+- Database: mySQL
 - Ambiente di sviluppo: Visual Studio Code
 
 ---

@@ -1,93 +1,146 @@
-# ANALISI FUNZIONALE - SISTEMA GESTIONE XXXX
+# ANALISI FUNZIONALE – SISTEMA GESTIONE FERIE
 
-TEAM: _________  
+**Team:**
+Moisei Cristofor, Bonfanti Riccardo, Marchiella Diego, Tessaro Alessandro
 
-Diagrammi 
+---
 
-**Use Case Diagram**
-**Sequence Diagram**
+# 1. Diagrammi
 
+* Use Case Diagram
+* Sequence Diagram
 
-## 2. CASI D'USO PRINCIPALI
+---
 
-### UC001: 
+# 2. Casi d'Uso Principali
 
-**Attore principale**: Dipendente 
-**Pre-condizioni**: Login effettuato
-**Post-condizioni**: Richiesta salvata, Manager notificata
+## UC001 – Richiesta Ferie
 
-**Flusso principale**:
+**Attore principale:** Dipendente
 
-1. Clicca "Nuova Richiesta" dal Dashboard
-2. Compila form: date inizio/fine, tipo ferie
-3. Clicca "Invia" → Sistema valida date e saldo
-4. Verifica sovrapposizioni reparto (<80%)
-5. Salva DB stato="Pendente", invia email Manager
+**Pre-condizioni**
 
-**Eccezioni**: 
+* L'utente ha effettuato il login al sistema.
 
-- E1: Saldo insufficiente → Alert "Ferie non sufficienti"
-- E2: Sovrapposizione critica → "Troppi colleghi in ferie"
+**Post-condizioni**
 
-### UC002: 
+* La richiesta viene salvata nel database.
+* Il manager viene notificato.
 
-**Attore principale**: Manager 
-**Pre-condizioni**: Login, richieste pendenti
-**Post-condizioni**: Stato "Approvata/Rifiutata"
+### Flusso Principale
 
-**Flusso principale**:
+1. Il dipendente clicca **"Nuova Richiesta"** dal dashboard.
+2. Compila il form inserendo:
 
-1. Apre "Richieste Team" → Tabella pendenti
-2. Clicca richiesta #123 → Vede dettagli
-3. Seleziona "Approva" o "Rifiuta + motivazione"
-4. Conferma → Aggiorna saldo ferie, notifica Dipendente
+   * data di inizio
+   * data di fine
+   * tipo di ferie.
+3. Clicca **"Invia"**.
+4. Il sistema valida:
 
-**Eccezioni**: E1: Fuori reparto → Accesso negato
+   * le date inserite
+   * il saldo ferie disponibile.
+5. Il sistema verifica la sovrapposizione nel reparto (**massimo 80% di dipendenti assenti**).
+6. Se tutto è valido:
 
-### UC003: 
+   * salva la richiesta nel database con stato **"Pendente"**
+   * invia una **email di notifica al manager**.
 
-**Attore principale**: HR 
-**Pre-condizioni**: Login HR
-**Post-condizioni**: CSV esportato
+### Eccezioni
 
-**Flusso principale**:
+**E1 – Saldo insufficiente**
 
-1. Apre "Report Reparto" → Seleziona mese/reparto
-2. Vede grafico torta + tabella dettagli
-3. Clicca "Esporta CSV" → Download file
+Il sistema mostra il messaggio:
 
-**Eccezioni**: E1: Nessun dato → "Report vuoto"
+```
+Ferie non sufficienti
+```
 
+**E2 – Sovrapposizione critica**
 
-## 2. SEQUENZA
+Il sistema mostra il messaggio:
 
-actor "Dipendente Mario" as D
-participant Sistema as S
-participant DB as DB
-participant Email as E
-participant "Manager Anna" as M
+```
+Troppi colleghi in ferie nello stesso periodo
+```
 
-D -> S: login(email,pass)
-S -> DB: validateUser()
-DB --> S: OK + saldo=22gg
-S --> D: Token Ok
+---
 
-D -> S: POST /richieste {15/07-19/07}
-S -> DB: checkSovrapposizioni(IT) alt <80% reparto
-S -> DB: INSERT (stato='Pendente')
-S -> E: notificaManager()
-E -> M: "Nuova richiesta #456"
-S --> D: SUCCESS 
-S --> D: ERROR sovrapposizione
+## UC002 – Gestione Richiesta Ferie
 
+**Attore principale:** Manager
 
-## 3. MODELLI DATI
+**Pre-condizioni**
 
-**Entità Principali**:
-- Utenti: id, matricola, nome, cognome, reparto, ruolo, email, ferie_residue (int)
-- Richieste: id, utente_id(FK), data_richiesta, data_inizio, data_fine, stato, manager_id(FK)
-- Reparti: id, nome, max_assenti_simultanei (15% totale)
+* Il manager ha effettuato il login.
+* Sono presenti richieste pendenti.
 
+**Post-condizioni**
 
+* La richiesta viene aggiornata a:
 
+  * **Approvata**
+  * **Rifiutata**
 
+### Flusso Principale
+
+1. Il manager apre la sezione **"Richieste Team"**.
+2. Visualizza la tabella con le richieste pendenti.
+3. Clicca sulla richiesta **#123**.
+4. Visualizza i dettagli della richiesta.
+5. Seleziona:
+
+   * **Approva**
+   * oppure **Rifiuta** inserendo una motivazione.
+6. Conferma l'operazione.
+7. Il sistema:
+
+   * aggiorna lo stato della richiesta
+   * aggiorna il saldo ferie del dipendente
+   * invia una notifica al dipendente.
+
+### Eccezioni
+
+**E1 – Accesso non autorizzato**
+
+Se il manager tenta di accedere a una richiesta non appartenente al proprio reparto:
+
+```
+Accesso negato
+```
+
+---
+
+# 5. Modello dei Dati
+
+## Entità Principali
+
+### Users
+
+* id_user (PK)
+* nome
+* cognome
+* email
+* ruolo
+
+### Groups
+
+* id_group (PK)
+* nome
+* descrizione
+* id_responsabile (FK)
+
+### Registrazioni
+
+* id_user (PK, FK)
+* data
+* password
+
+### Commenti
+
+* id_commento (PK)
+* id_user (FK)
+* testo
+* data
+
+---

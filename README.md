@@ -117,7 +117,6 @@ Le tecnologie sono:
 
 - Backend: PHP
 - Frontend: HTML, CSS, JS
-- Framework: Springboot
 - Database: mySQL
 - Ambiente di sviluppo: Visual Studio Code
 

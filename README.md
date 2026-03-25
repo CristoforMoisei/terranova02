@@ -1,6 +1,8 @@
 # Sistema di Gestione del Calendario Ferie Aziendale
 
 ![Backend](https://img.shields.io/badge/backend-php-green) ![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-orange) ![Database](https://img.shields.io/badge/database-MySQL-lightgrey)
+![Status](https://img.shields.io/badge/status-in%20development-blue)
+
 
 ## Indice
 
@@ -126,4 +128,3 @@ Le tecnologie sono:
 
 Riccardo Bonfanti, Cristofor Moisei, Diego Marchiella, Alessandro Tessaro.
 
-![Status](https://img.shields.io/badge/status-in%20development-blue)

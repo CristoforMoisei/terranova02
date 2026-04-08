@@ -124,6 +124,10 @@ Le tecnologie sono:
 
 ---
 
+Preview Frontend https://team-leave-wise.lovable.app/
+
+---
+
 ## Autori
 
 Riccardo Bonfanti, Cristofor Moisei, Diego Marchiella, Alessandro Tessaro.

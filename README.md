@@ -97,6 +97,7 @@ L’amministratore può:
 Il progetto è strutturato secondo un’architettura client-server:
 
 - Frontend: interfaccia web per utenti e amministratori
+  
   Preview Frontend https://team-leave-wise.lovable.app/
   
 - Backend: gestione logica applicativa e validazione regole

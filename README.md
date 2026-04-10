@@ -116,7 +116,9 @@ Le tecnologie sono:
 
 ---
 
+## Organizzazione del progetto
 
+Diagramma di Gantt
 
 ---
 

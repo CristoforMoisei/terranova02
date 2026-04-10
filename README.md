@@ -102,17 +102,6 @@ Il progetto è strutturato secondo un’architettura client-server:
 
 ---
 
-## Modellazione Database
-
-Il sistema prevede un database relazionale con entità principali quali:
-
-- User
-- Group
-- Comment
-- Registrazione
-
----
-
 ## Tecnologie Utilizzate
 
 Le tecnologie sono:

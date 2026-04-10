@@ -98,7 +98,7 @@ Il progetto è strutturato secondo un’architettura client-server:
 
 - Frontend: interfaccia web per utenti e amministratori
   
-  Preview Frontend https://terranova-ferie.lovable.app/
+  Preview Frontend [https://terranova-ferie.lovable.app/](https://terranova-ferie.lovable.app)
   
 - Backend: gestione logica applicativa e validazione regole
 - Database relazionale: gestione dati strutturati

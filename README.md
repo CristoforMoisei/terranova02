@@ -15,7 +15,7 @@
   - [5. Gestione richieste e approvazioni](#5-gestione-richieste-e-approvazioni)
   - [6. Area amministrativa](#6-area-amministrativa)
 - [Architettura del Sistema](#architettura-del-sistema)
-- [Modellazione Database](#modellazione-database)
+- [Organizzazione del progetto](#Organizzazione-del-progetto)
 - [Tecnologie Utilizzate](#tecnologie-utilizzate)
 - [Autori](#autori)
 

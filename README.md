@@ -74,14 +74,8 @@ Per ogni periodo ferie è possibile definire:
 - Numero minimo/massimo di giorni consecutivi
 - Periodi critici bloccati
 
-### 5. Gestione richieste e approvazioni
 
-- Invio richiesta ferie
-- Segnalazione conflitti
-- Approvazione, rifiuto o richiesta modifica
-- Storico comunicazioni tramite tabella Comments
-
-### 6. Area amministrativa
+### 5. Area amministrativa
 
 L’amministratore può:
 
